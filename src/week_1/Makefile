@@ -19,7 +19,8 @@ IOPTCXX=$(IOPT) -std=c++14
 IOPTCXX_DBG=$(IOPT_DBG) -std=c++14
 
 all: $(BUILD_DIR)/check_brackets.exe \
-$(BUILD_DIR)/tree_height.exe
+$(BUILD_DIR)/tree_height.exe \
+$(BUILD_DIR)/process_packages.exe
 
 OBJ:=$(patsubst %.cpp,%.o,   $(patsubst %.c,%.o,$(SRC))   )
 OBJ:=$(patsubst %,${BUILD_DIR}/%,$(OBJ) )
@@ -47,6 +48,10 @@ ${BUILD_DIR}/check_brackets.exe: ${BUILD_DIR}/check_brackets.o
 ${BUILD_DIR}/tree_height.exe: ${BUILD_DIR}/tree_height.o
 	rm -f $@
 	g++ $< $(LOPT_DBG) -o $@
-	
+
+${BUILD_DIR}/process_packages.exe: ${BUILD_DIR}/process_packages.o
+	rm -f $@
+	g++ $< $(LOPT_DBG) -o $@
+
 clean:
 	cd ${BUILD_DIR}; rm -f `find . -name "*.o"`

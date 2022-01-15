@@ -1,5 +1,6 @@
-#include <algorithm>
 #include <assert.h>
+
+#include <algorithm>
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -43,7 +44,7 @@ void toc() { tic(1); }
 class Node;
 
 class Node {
-public:
+ public:
   int key;
   Node *parent;
   std::vector<Node *> children;
@@ -61,8 +62,7 @@ int tree_height_naive(std::vector<Node> &nodes) {
   int n = nodes.size();
   for (int leaf_index = 0; leaf_index < n; leaf_index++) {
     int height = 0;
-    for (Node *v = &nodes[leaf_index]; v != NULL; v = v->parent)
-      height++;
+    for (Node *v = &nodes[leaf_index]; v != NULL; v = v->parent) height++;
     maxHeight = std::max(maxHeight, height);
   }
 
@@ -82,8 +82,7 @@ int tree_height_fast(Node *root) {
       Node *node = node_queue.front();
       node_queue.pop();
       for (int i = 0; i < node->children.size(); i++) {
-        if (node->children[i] != NULL)
-          node_queue.push(node->children[i]);
+        if (node->children[i] != NULL) node_queue.push(node->children[i]);
       }
       node_count--;
     }
@@ -175,7 +174,7 @@ int main_with_large_stack_space() {
 int main(int argc, char **argv) {
 #if defined(__unix__) || defined(__APPLE__)
   // Allow larger stack space
-  const rlim_t kStackSize = 16 * 1024 * 1024; // min stack size = 16 MB
+  const rlim_t kStackSize = 16 * 1024 * 1024;  // min stack size = 16 MB
   struct rlimit rl;
   int result;
 
