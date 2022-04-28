@@ -18,7 +18,8 @@ LOPT_DBG+=-lm
 IOPTCXX=$(IOPT) -std=c++14
 IOPTCXX_DBG=$(IOPT_DBG) -std=c++14
 
-all: $(BUILD_DIR)/make_heap.exe
+all: $(BUILD_DIR)/make_heap.exe \
+$(BUILD_DIR)/parallel_processing.exe
 
 OBJ:=$(patsubst %.cpp,%.o,   $(patsubst %.c,%.o,$(SRC))   )
 OBJ:=$(patsubst %,${BUILD_DIR}/%,$(OBJ) )
@@ -42,6 +43,10 @@ ${BUILD_DIR}/%_dbg.o: %.c
 ${BUILD_DIR}/make_heap.exe: ${BUILD_DIR}/make_heap.o
 	rm -f $@
 	g++ $< $(LOPT_DBG) -o $@
+
+${BUILD_DIR}/parallel_processing.exe: ${BUILD_DIR}/parallel_processing.o
+	rm -f $@
+	g++ $< $(LOPT_DBG) -o $@	
 
 clean:
 	cd ${BUILD_DIR}; rm -f `find . -name "*.o"`
